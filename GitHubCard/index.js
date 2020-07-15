@@ -1,8 +1,15 @@
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+//const axios = require('axios');
+axios.get("https://api.github.com/users/cyasmani");
+
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -49,6 +56,46 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function myself(info) {
+
+  //created elements
+  const divider1 = document.createElement("div");
+  const image1 = document.createElement("img");
+  const divider2 = document.createElement("div");
+  const header3 = document.createElement("h3");
+  const paragraph1 = document.createElement("p");
+  const paragraph2 = document.createElement("p")
+  const paragraph3 = document.createElement("p")
+  const anchor = document.createElement("a");
+  const paragraph4 = document.createElement("p");
+  const paragraph5 = document.createElement("p");
+  const paragraph6 = document.createElement("p");
+
+  const maindiv = document.querySelector(".cards")
+
+  //added classes to elements
+  divider1.classList.add(".card");
+  divider2.classList.add(".card-info");
+  header3.classList.add(".name");
+  paragraph1.classList.add(".username");
+
+  maindiv.appendChild(divider1);
+  divider1.appendChild(image1);
+  divider1.appendChild(divider2);
+  divider2.appendChild(header3);
+  divider2.appendChild(paragraph1);
+  divider2.appendChild(paragraph2);
+  divider2.appendChild(paragraph3);
+  paragraph3.appendChild(anchor);
+  divider2.appendChild(paragraph4);
+  divider2.appendChild(paragraph5);
+  divider2.appendChild(paragraph6);
+
+
+
+
+}
 
 /*
   List of LS Instructors Github username's:
