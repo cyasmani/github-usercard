@@ -6,8 +6,24 @@ import axios from 'axios';
 */
 
 //const axios = require('axios');
-axios.get("https://api.github.com/users/cyasmani");
 
+axios.get("https://api.github.com/users/cyasmani")
+  .then(response => {
+    const maindiv = document.querySelector(".cards");
+    const divider1 = document.querySelector(".card");
+    
+    
+    maindiv.appendChild(myself(response.data));
+   
+    
+    
+
+  }) .catch(err => {
+
+    console.log("error displayed", err);
+
+
+  })
 
 
 
@@ -57,7 +73,7 @@ const followersArray = [];
     </div>
 */
 
-function myself(info) {
+function myself(data) {
 
   //created elements
   const divider1 = document.createElement("div");
@@ -75,11 +91,12 @@ function myself(info) {
   const maindiv = document.querySelector(".cards")
 
   //added classes to elements
-  divider1.classList.add(".card");
-  divider2.classList.add(".card-info");
-  header3.classList.add(".name");
-  paragraph1.classList.add(".username");
+  divider1.classList.add("card");
+  divider2.classList.add("card-info");
+  header3.classList.add("name");
+  paragraph1.classList.add("username");
 
+  //appended elements
   maindiv.appendChild(divider1);
   divider1.appendChild(image1);
   divider1.appendChild(divider2);
@@ -92,10 +109,25 @@ function myself(info) {
   divider2.appendChild(paragraph5);
   divider2.appendChild(paragraph6);
 
+  image1.setAttribute("src", `${data.avatar_url}`);
+  header3.textContent = data.name;
+  paragraph1.textContent = data.login;
+  paragraph2.textContent = data.location;
+  paragraph3.textContent = "Profile:";
+  anchor.textContent = data.url;
+  paragraph4.textContent = data.followers;
+  paragraph5.textContent = data.following;
+  paragraph6.textContent = `Bio: ${data.bio}`
+
+  return myself;
+  
+
 
 
 
 }
+
+//console.log(myself(information))
 
 /*
   List of LS Instructors Github username's:
