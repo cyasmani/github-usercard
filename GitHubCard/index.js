@@ -14,9 +14,7 @@ axios.get("https://api.github.com/users/cyasmani")
     
     
     maindiv.appendChild(myself(response.data));
-   
-    
-    
+
 
   }) .catch(err => {
 
@@ -127,13 +125,19 @@ function myself(data) {
 
 }
 
-//console.log(myself(information))
+followersArray.push("https://api.github.com/users/tetondan");
+followersArray.push("https://api.github.com/users/dustinmyers");
+followersArray.push("https://api.github.com/users/justsml");
+followersArray.push("https://api.github.com/users/luishrd");
+followersArray.push("https://api.github.com/users/bigknell");
 
-/*
-  List of LS Instructors Github username's:
-    tetondan
-    dustinmyers
-    justsml
-    luishrd
-    bigknell
-*/
+
+followersArray.forEach(item => {
+  axios.get(item) 
+  .then(response => {
+    console.log("success", response.data)
+    myself(response.data);
+  }) .catch(err => {
+    console.log("error", err)
+  })
+})
