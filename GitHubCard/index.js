@@ -1,8 +1,29 @@
+import axios from 'axios';
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+//const axios = require('axios');
+
+axios.get("https://api.github.com/users/cyasmani")
+  .then(response => {
+    const maindiv = document.querySelector(".cards");
+    const divider1 = document.querySelector(".card");
+    
+    
+    maindiv.appendChild(myself(response.data));
+
+
+  }) .catch(err => {
+
+    console.log("error displayed", err);
+
+
+  })
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -50,11 +71,73 @@ const followersArray = [];
     </div>
 */
 
-/*
-  List of LS Instructors Github username's:
-    tetondan
-    dustinmyers
-    justsml
-    luishrd
-    bigknell
-*/
+function myself(data) {
+
+  //created elements
+  const divider1 = document.createElement("div");
+  const image1 = document.createElement("img");
+  const divider2 = document.createElement("div");
+  const header3 = document.createElement("h3");
+  const paragraph1 = document.createElement("p");
+  const paragraph2 = document.createElement("p")
+  const paragraph3 = document.createElement("p")
+  const anchor = document.createElement("a");
+  const paragraph4 = document.createElement("p");
+  const paragraph5 = document.createElement("p");
+  const paragraph6 = document.createElement("p");
+
+  const maindiv = document.querySelector(".cards")
+
+  //added classes to elements
+  divider1.classList.add("card");
+  divider2.classList.add("card-info");
+  header3.classList.add("name");
+  paragraph1.classList.add("username");
+
+  //appended elements
+  maindiv.appendChild(divider1);
+  divider1.appendChild(image1);
+  divider1.appendChild(divider2);
+  divider2.appendChild(header3);
+  divider2.appendChild(paragraph1);
+  divider2.appendChild(paragraph2);
+  divider2.appendChild(paragraph3);
+  paragraph3.appendChild(anchor);
+  divider2.appendChild(paragraph4);
+  divider2.appendChild(paragraph5);
+  divider2.appendChild(paragraph6);
+
+  image1.setAttribute("src", `${data.avatar_url}`);
+  header3.textContent = data.name;
+  paragraph1.textContent = data.login;
+  paragraph2.textContent = data.location;
+  paragraph3.textContent = "Profile:";
+  anchor.textContent = data.url;
+  paragraph4.textContent = data.followers;
+  paragraph5.textContent = data.following;
+  paragraph6.textContent = `Bio: ${data.bio}`
+
+  return myself;
+  
+
+
+
+
+}
+
+followersArray.push("https://api.github.com/users/tetondan");
+followersArray.push("https://api.github.com/users/dustinmyers");
+followersArray.push("https://api.github.com/users/justsml");
+followersArray.push("https://api.github.com/users/luishrd");
+followersArray.push("https://api.github.com/users/bigknell");
+
+
+followersArray.forEach(item => {
+  axios.get(item) 
+  .then(response => {
+    console.log("success", response.data)
+    myself(response.data);
+  }) .catch(err => {
+    console.log("error", err)
+  })
+})
